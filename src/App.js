@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
-import AddCourseOutcome from './AddCourseOutcome'; 
+import React from 'react';
+import AddCourseOutcome from './AddCourseOutcome';
 
 function App() {
   return (
-    <div>
+    <div style={{ fontFamily: 'sans-serif', padding: '2rem' }}>
       <h1>📘 CLO Tracker</h1>
       <AddCourseOutcome />
     </div>
