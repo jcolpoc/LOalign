@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 function App() {
+  const [ping, setPing] = useState('');
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // Ping the backend
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/ping`)
+      .then(res => setPing(res.data.message))
+      .catch(err => setPing("❌ Error connecting to backend"));
+
+    // Example: Fetch learning outcomes
+    axios.get(`${process.env.REACT_APP_API_BASE_URL}/learning-outcomes`)
+      .then(res => setData(res.data))
+      .catch(err => console.error("Data fetch error", err));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
+      <h1>📡 Frontend Connected to Backend</h1>
+      <p><strong>Status:</strong> {ping}</p>
+
+      <h2>📘 Learning Outcomes</h2>
+      <ul>
+        {data.map((item, i) => (
+          <li key={i}>{JSON.stringify(item)}</li>
+        ))}
+      </ul>
     </div>
   );
 }
