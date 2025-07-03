@@ -1,4 +1,4 @@
-import React from 'react';
+
 import CLOManager from './CLOManager';
 
 function App() {
