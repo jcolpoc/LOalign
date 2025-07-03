@@ -82,13 +82,17 @@ function CLOManager() {
 
       <h3>📄 Existing CLOs</h3>
       <ul>
-        {clos.map(clo => (
-          <li key={clo.id}>
-            <strong>{clo.description}</strong> ({clo.clo_theme}) – Course #{clo.course_id}
-            <button onClick={() => handleDelete(clo.id)} style={{ marginLeft: '1rem' }}>🗑️ Delete</button>
-          </li>
-        ))}
-      </ul>
+  {Array.isArray(clos) ? (
+    clos.map(clo => (
+      <li key={clo.id}>
+        <strong>{clo.description}</strong> ({clo.clo_theme}) – Course #{clo.course_id}
+        <button onClick={() => handleDelete(clo.id)} style={{ marginLeft: '1rem' }}>🗑️ Delete</button>
+      </li>
+    ))
+  ) : (
+    <li>⚠️ CLO data is not in expected format.</li>
+  )}
+</ul>
     </div>
   );
 }
